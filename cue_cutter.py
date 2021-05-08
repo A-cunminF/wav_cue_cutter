@@ -5,7 +5,7 @@ import io, os, sys
 CUE = str(sys.argv[1])
 WAV = str(sys.argv[2])
 
-# 对cue文件进行处理，得到字典
+# 对cue文件进行处理，得到字典 process the cue file to dict
 fp = io.open(CUE,'r',encoding='utf-8')
 cue = []
 song = {}
@@ -32,7 +32,7 @@ for line in fp.readlines():
 
 fp.close
 
-# 获取需要cut的节点（line）和音乐的标题
+# 获取需要cut的节点（line）和音乐的标题 get the point that we need to cut(which is the list: line) and the music title
 line=[]
 title=[]
 for i in range(len(cue)):
@@ -42,9 +42,9 @@ for i in range(len(cue)):
     line.append((minute*60+second)*1000+ms)
     title.append(cue[i]['TITLE']+'.wav')
 
-# 打开音频文件
+# 打开音频文件 open the music file
 wav = AudioSegment.from_file(WAV)
-finish=wav.duration_seconds*1000 # 增加结束点
+finish=wav.duration_seconds*1000 # 增加结束点 add the finish point
 line.append(finish)
 for i in range(len(line)-1):
     begin = line[i]
